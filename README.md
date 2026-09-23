@@ -48,12 +48,17 @@ Os dados ficam em [`data.js`](data.js). Para tornar um resultado oficial
 3. Publique (`git add`, `git commit`, `git push`) — o GitHub Pages atualiza em
    1–2 minutos.
 
+Confrontos diretos conhecidos das 6 primeiras rodadas (usados como 1º
+critério de desempate, antes da diferença de pontos) ficam em
+`HEAD_TO_HEAD_WINNERS`, também em `data.js`.
+
 ## Estrutura
 
 ```
 index.html   estrutura da página
-style.css    visual (cores da URP)
-data.js      dados: times, classificação base, jogos, resultados oficiais
+style.css    visual (cores da URP), com tema claro/escuro
+i18n.js      traduções (ES padrão, PT, EN) e alternância de tema
+data.js      dados: times, classificação base, jogos, resultados oficiais, confrontos diretos
 app.js       lógica de classificação, simulação e renderização
 assets/logos/  escudos dos clubes e da URP
 ```
@@ -64,6 +69,17 @@ estático (ou GitHub Pages).
 ## Fórmula de pontuação
 
 `Pontos = 4 × vitórias + 2 × empates + pontos-bônus`, igual à planilha oficial.
-Pontos-bônus (ofensivo/defensivo) não são simulados automaticamente — só o
-resultado (vitória/empate/derrota) é calculado a partir do placar; o bônus real
-some quando o resultado oficial é adicionado.
+O bônus tem duas partes:
+
+- **Defensivo** — perder por menos de 7 pontos dá 1 ponto-bônus. Calculado
+  automaticamente a partir do placar preenchido, sem precisar de nada extra.
+- **Ofensivo** — vencer marcando 4 tries a mais que o adversário dá 1
+  ponto-bônus. Isso não dá pra derivar só do placar final (não coletamos
+  quantos tries cada time marcou), então cada jogo tem um checkbox "+ bônus
+  ataque" opcional por time, pra quem souber marcar.
+
+## Critérios de desempate
+
+Pontos → confronto direto (`HEAD_TO_HEAD_WINNERS`, ou o resultado do próprio
+jogo quando as duas equipes se enfrentaram na rodada/grupo em questão) →
+diferença de pontos → pontos a favor → ordem alfabética.

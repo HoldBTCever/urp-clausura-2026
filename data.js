@@ -45,3 +45,15 @@ const FINAL_DATE = "2026-10-31";
 // matchId segue o padrao: "<oro|des>-r<1|2|3>-m<1|2>", "<oro|des>-semi-<1|2>",
 // "<oro|des>-final". Preencher aqui conforme os jogos forem confirmados.
 const OFFICIAL_PHASE2 = {};
+
+// Confrontos diretos conhecidos das 6 primeiras rodadas, usados como 1o
+// criterio de desempate quando duas equipes empatam em pontos (antes da
+// diferenca de pontos). Nao temos o resultado rodada-a-rodada das 6
+// primeiras datas, so o total acumulado (BASE_STANDINGS) - por isso este
+// registro manual: preencha aqui so os confrontos que voce souber, no
+// formato "id-time-1|id-time-2" (ordem alfabetica) -> id do time vencedor.
+// Confrontos da ultima rodada (ROUND7_MATCHES) nao precisam entrar aqui:
+// esses ja sao considerados automaticamente pelo resultado do jogo.
+const HEAD_TO_HEAD_WINNERS = {
+  "curda|santa-clara": "santa-clara",
+};
