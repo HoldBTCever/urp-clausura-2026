@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Torneo Clausura 2026 — Primera División URP</title>
+<meta name="description" content="Acompanhe a classificação do Torneo Clausura 2026 da Primera División de rugby do Paraguai (URP): tabela, última rodada, Taça Oro, Taça Desarrollo, semifinais e final.">
+<link rel="icon" href="assets/logos/urp-shield.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <img src="assets/logos/urp-shield.png" alt="URP" class="urp-shield">
+    <div class="header-text">
+      <p class="eyebrow">Unión de Rugby del Paraguay</p>
+      <h1>Torneo Clausura 2026<br><span>Primera División</span></h1>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="tabela-section" class="card">
+    <h2>Classificação</h2>
+    <p class="hint" id="tabela-hint"></p>
+    <div class="table-scroll">
+      <table id="tabela-principal" class="standings"></table>
+    </div>
+  </section>
+
+  <section id="ultima-rodada" class="card sim-card">
+    <h2>Última rodada da fase classificatória <span class="badge-sim">simulação</span></h2>
+    <p class="hint">Preencha os placares abaixo para ver como ficaria a classificação final e quem avançaria para a Taça Oro (1º–4º) e a Taça Desarrollo (5º–8º). Esses placares ficam salvos só no seu navegador — os resultados oficiais serão adicionados aqui assim que confirmados, e passam a valer para todo mundo.</p>
+    <div id="round7-matches" class="matches-grid"></div>
+  </section>
+
+  <section class="card">
+    <h2>Fase final</h2>
+    <p class="hint">A partir do 1º ao 4º lugar (Taça Oro) e do 5º ao 8º lugar (Taça Desarrollo) da classificação acima, cada grupo joga todos contra todos (3 rodadas), depois semifinal e final. A classificação da fase final é zerada — vale só o que acontecer nesses jogos.</p>
+  </section>
+
+  <section id="fase-final" class="phase-columns">
+    <div class="phase-col oro">
+      <h2>🏆 Taça Oro <span class="sub">1º ao 4º lugar</span></h2>
+      <div id="oro-groupstage"></div>
+      <h3>Semifinal <span class="date">24/10</span></h3>
+      <div id="oro-semis" class="matches-grid"></div>
+      <h3>Final <span class="date">31/10</span></h3>
+      <div id="oro-final" class="matches-grid"></div>
+      <div id="oro-champion" class="champion-banner" hidden></div>
+    </div>
+    <div class="phase-col desarrollo">
+      <h2>🥈 Taça Desarrollo <span class="sub">5º ao 8º lugar</span></h2>
+      <div id="des-groupstage"></div>
+      <h3>Semifinal <span class="date">24/10</span></h3>
+      <div id="des-semis" class="matches-grid"></div>
+      <h3>Final <span class="date">31/10</span></h3>
+      <div id="des-final" class="matches-grid"></div>
+      <div id="des-champion" class="champion-banner" hidden></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <button id="reset-sim" class="btn-reset">Limpar minha simulação</button>
+    <p class="footnote">Classificação após 6 rodadas conforme planilha oficial da URP (23/09/2026). Os placares dos próximos jogos preenchidos por você ficam salvos só no seu navegador (não são enviados a ninguém) e servem apenas para simular cenários.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Site feito por torcedores, para torcedores. Não é um site oficial da URP.</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
