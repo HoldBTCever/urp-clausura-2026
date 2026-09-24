@@ -5,13 +5,13 @@
 
 const TEAMS = [
   { id: "san-jose", name: "San José", logo: "assets/logos/san-jose.png", color: "#9cc2e6", text: "#0d2b45" },
-  { id: "luque", name: "Luque", logo: "assets/logos/luque.jpg", color: "#237acb", text: "#ffffff" },
+  { id: "luque", name: "Luque", logo: "assets/logos/luque.png", color: "#237acb", text: "#ffffff" },
   { id: "curda", name: "Curda", logo: "assets/logos/curda.png", color: "#0c0c0c", text: "#f2c14e" },
-  { id: "asuncion", name: "Asunción", logo: "assets/logos/asuncion.jpg", color: "#a15f01", text: "#ffffff" },
+  { id: "asuncion", name: "Asunción", logo: "assets/logos/asuncion.png", color: "#a15f01", text: "#ffffff" },
   { id: "santa-clara", name: "Santa Clara", logo: "assets/logos/santa-clara.png", color: "#1414a6", text: "#ffffff" },
-  { id: "cristo-rey", name: "Cristo Rey", logo: "assets/logos/cristo-rey.jpg", color: "#019901", text: "#ffffff" },
-  { id: "fernando", name: "Fernando", logo: "assets/logos/fernando.jpg", color: "#bf0000", text: "#ffffff" },
-  { id: "jararas", name: "Jararás", logo: "assets/logos/jararas.jpg", color: "#965cca", text: "#ffffff" },
+  { id: "cristo-rey", name: "Cristo Rey", logo: "assets/logos/cristo-rey.png", color: "#019901", text: "#ffffff" },
+  { id: "fernando", name: "Fernando", logo: "assets/logos/fernando.png", color: "#bf0000", text: "#ffffff" },
+  { id: "jararas", name: "Jararás", logo: "assets/logos/jararas.png", color: "#965cca", text: "#ffffff" },
 ];
 
 // Acumulado apos as 6 primeiras rodadas (fonte: planilha oficial URP, 23/09/2026)
