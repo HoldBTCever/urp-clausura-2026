@@ -182,33 +182,32 @@ function updateLangButtons() {
   });
 }
 
+// Claro e sempre o padrao (nao segue mais a preferencia do sistema); so
+// muda quando a pessoa clica no toggle, e a escolha fica salva.
 function getTheme() {
   try {
     const saved = localStorage.getItem(THEME_KEY);
-    if (saved === "light" || saved === "dark") return saved;
+    if (saved === "dark") return "dark";
   } catch (e) { /* ignore */ }
-  return null; // null = segue a preferencia do sistema
+  return "light";
 }
 
 function applyTheme(theme) {
-  if (theme) {
-    document.documentElement.setAttribute("data-theme", theme);
+  if (theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
   } else {
     document.documentElement.removeAttribute("data-theme");
   }
   const btn = document.getElementById("theme-toggle");
   if (btn) {
-    const isDark = theme ? theme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-    btn.textContent = isDark ? "☀️" : "🌙";
+    btn.textContent = theme === "dark" ? "☀️" : "🌙";
     btn.setAttribute("aria-label", t("theme_toggle"));
     btn.title = t("theme_toggle");
   }
 }
 
 function toggleTheme() {
-  const current = getTheme();
-  const isDarkNow = current ? current === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const next = isDarkNow ? "light" : "dark";
+  const next = getTheme() === "dark" ? "light" : "dark";
   try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* ignore */ }
   applyTheme(next);
 }
