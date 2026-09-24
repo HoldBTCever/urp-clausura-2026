@@ -355,15 +355,25 @@ tr.split-row td {
 }
 
 .score-input {
-  width: 40px;
+  width: 56px;
   text-align: center;
-  padding: 5px 2px;
+  padding: 5px 4px;
   border: 1.5px solid var(--border);
   border-radius: 6px;
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--ink);
   background: var(--input-bg);
+  /* remove as setas nativas do <input type=number> - com largura maior elas
+     roubam espaco do texto e o "1" de "100" ficava colado nelas */
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.score-input::-webkit-outer-spin-button,
+.score-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .score-input:disabled { background: var(--input-disabled-bg); color: var(--input-disabled-text); border-color: var(--input-disabled-border); }
@@ -387,6 +397,18 @@ tr.split-row td {
   color: var(--muted);
   text-transform: none;
   cursor: pointer;
+}
+
+/* So aparece quando a vitoria foi por uma margem grande (>15 pontos) -
+   destacado pra chamar atencao, ja que e a pessoa quem sabe se rolou
+   bonus ofensivo (o site nao tem como saber quantos tries cada time fez). */
+.bonus-check.prompt {
+  color: var(--oro);
+  background: var(--oro-bg);
+  border: 1px solid var(--oro-border);
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-weight: 700;
 }
 
 .bonus-check input { width: 12px; height: 12px; margin: 0; cursor: pointer; }

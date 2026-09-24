@@ -3,6 +3,9 @@
 
 const TEAMS_BY_ID = Object.fromEntries(TEAMS.map((t) => [t.id, t]));
 const STORE_KEY = "urp_clausura_2026_sim_v1";
+// A partir de qual diferenca de pontos vale a pena perguntar se teve bonus
+// ofensivo (4+ tries de diferenca) - abaixo disso e raro demais.
+const ATK_BONUS_THRESHOLD = 15;
 
 let SIM = loadSim();
 
@@ -198,8 +201,29 @@ function createMatchCard(match, opts) {
   const locked = official;
   const showBonus = !!opts.showBonus;
 
-  const bonusCheckbox = (side, team, checked) => `
-        <label class="bonus-check" title="${t("atk_bonus_title")}">
+  // O bonus ofensivo (4+ tries de diferenca) so faz sentido perguntar quando
+  // a vitoria foi por uma margem grande - abaixo disso e raro demais pra
+  // valer a pena mostrar o checkbox toda hora. ATK_BONUS_THRESHOLD casa com
+  // a regra pedida: só "pergunta" (mostra, em destaque) quando a diferenca
+  // de pontos for maior que 15, e so para quem esta na frente.
+  const diff = result.scoreA != null && result.scoreB != null ? Math.abs(result.scoreA - result.scoreB) : null;
+  const atkEligibleA = showBonus && diff != null && diff > ATK_BONUS_THRESHOLD && result.scoreA > result.scoreB;
+  const atkEligibleB = showBonus && diff != null && diff > ATK_BONUS_THRESHOLD && result.scoreB > result.scoreA;
+
+  // Se o placar mudou e um lado deixou de ser elegivel, o checkbox some da
+  // tela - mas o bonus marcado antes nao pode continuar valendo escondido.
+  if (!locked && showBonus) {
+    const correctedAtkA = atkEligibleA ? result.atkA : false;
+    const correctedAtkB = atkEligibleB ? result.atkB : false;
+    if (correctedAtkA !== !!result.atkA || correctedAtkB !== !!result.atkB) {
+      setSimResult(match.id, match.a, match.b, result.scoreA, result.scoreB, correctedAtkA, correctedAtkB);
+      result.atkA = correctedAtkA;
+      result.atkB = correctedAtkB;
+    }
+  }
+
+  const bonusCheckbox = (side, checked) => `
+        <label class="bonus-check prompt" title="${t("atk_bonus_title")}">
           <input type="checkbox" data-atk="${side}" ${checked ? "checked" : ""} ${locked ? "disabled" : ""}>
           ${t("atk_bonus_label")}
         </label>`;
@@ -213,7 +237,7 @@ function createMatchCard(match, opts) {
       <div class="match-team">
         <img src="${teamA.logo}" class="match-logo" alt="">
         <span>${teamA.name}</span>
-        ${showBonus ? bonusCheckbox("a", teamA, result.atkA) : ""}
+        ${atkEligibleA ? bonusCheckbox("a", result.atkA) : ""}
       </div>
       <div class="match-score">
         <input type="number" min="0" inputmode="numeric" class="score-input" data-side="a" ${locked ? "disabled" : ""} value="${result.scoreA ?? ""}" placeholder="–">
@@ -223,7 +247,7 @@ function createMatchCard(match, opts) {
       <div class="match-team">
         <span>${teamB.name}</span>
         <img src="${teamB.logo}" class="match-logo" alt="">
-        ${showBonus ? bonusCheckbox("b", teamB, result.atkB) : ""}
+        ${atkEligibleB ? bonusCheckbox("b", result.atkB) : ""}
       </div>
     </div>
     <p class="draw-warning" hidden>${t("draw_warning")}</p>
