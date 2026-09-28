@@ -299,14 +299,24 @@ function createMatchCard(match, opts) {
   return wrap;
 }
 
-function roundRobin4(ids) {
-  const [a, b, c, d] = ids;
-  return [
-    [[a, d], [b, c]],
-    [[a, c], [d, b]],
-    [[a, b], [c, d]],
-  ];
-}
+// Sorteio oficial da fase de grupos, por indice de semente (0=1o colocado
+// da taca, 1=2o, 2=3o, 3=4o). O primeiro indice de cada par e o mandante.
+// NAO e simetrico entre as duas tacas - na Rodada 2 a Copa Oro manda com o
+// 3o colocado contra o 1o, e a Copa Desarrollo manda com o 1o contra o 3o.
+// Confirmado com o usuario contra o sorteio real da URP; nao "corrija" para
+// um padrao mais limpo sem conferir de novo com a fonte oficial.
+const GROUP_STAGE_PATTERN = {
+  oro: [
+    [[0, 3], [1, 2]],
+    [[2, 0], [3, 1]],
+    [[0, 1], [2, 3]],
+  ],
+  des: [
+    [[0, 3], [1, 2]],
+    [[0, 2], [3, 1]],
+    [[0, 1], [2, 3]],
+  ],
+};
 
 function buildGroupRounds(cupKey, seedIds) {
   if (!seedIds) {
@@ -318,12 +328,12 @@ function buildGroupRounds(cupKey, seedIds) {
       ],
     }));
   }
-  const rounds = roundRobin4(seedIds);
-  return rounds.map((pairs, ri) => ({
+  const pattern = GROUP_STAGE_PATTERN[cupKey];
+  return pattern.map((pairs, ri) => ({
     date: PHASE2_DATES[ri],
-    matches: pairs.map((p, pi) => {
+    matches: pairs.map((idxPair, pi) => {
       const id = `${cupKey}-r${ri + 1}-m${pi + 1}`;
-      return { id, a: p[0], b: p[1], official: OFFICIAL_PHASE2[id] || null };
+      return { id, a: seedIds[idxPair[0]], b: seedIds[idxPair[1]], official: OFFICIAL_PHASE2[id] || null };
     }),
   }));
 }
