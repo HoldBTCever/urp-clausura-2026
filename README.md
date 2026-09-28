@@ -45,7 +45,13 @@ Os dados ficam em [`data.js`](data.js). Para tornar um resultado oficial
    Padrão dos ids: `<oro|des>-r<1|2|3>-m<1|2>` para a fase de grupos,
    `<oro|des>-semi-<1|2>` para a semifinal, `<oro|des>-final` para a final.
 
-3. Publique (`git add`, `git commit`, `git push`) — o GitHub Pages atualiza em
+3. Antes de publicar, troque a data em `?v=20260928` (no `<link>` do
+   `style.css` e nos três `<script>` no fim do `index.html`) pela data de
+   hoje. Sem isso, quem já visitou o site antes pode continuar vendo os
+   dados antigos por causa do cache do navegador — o `?v=` força ele a
+   buscar o arquivo de novo.
+
+4. Publique (`git add`, `git commit`, `git push`) — o GitHub Pages atualiza em
    1–2 minutos.
 
 Confrontos diretos conhecidos das 6 primeiras rodadas (usados como 1º
