@@ -245,8 +245,8 @@ function createMatchCard(match, opts) {
         <input type="number" min="0" inputmode="numeric" class="score-input" data-side="b" ${locked ? "disabled" : ""} value="${result.scoreB ?? ""}" placeholder="–">
       </div>
       <div class="match-team">
-        <span>${teamB.name}</span>
         <img src="${teamB.logo}" class="match-logo" alt="">
+        <span>${teamB.name}</span>
         ${atkEligibleB ? bonusCheckbox("b", result.atkB) : ""}
       </div>
     </div>
