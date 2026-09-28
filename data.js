@@ -26,13 +26,27 @@ const BASE_STANDINGS = {
   "jararas": { pj: 6, pg: 0, pe: 0, pp: 6, bonus: 0, favor: 25, contra: 310 },
 };
 
-// Ultima rodada da fase classificatoria (antes dos playoffs).
+// Ultima rodada da fase classificatoria (antes dos playoffs) - ENCERRADA.
 // official: null enquanto o resultado nao for confirmado pelo administrador do site.
+//
+// Curda 54x46 Luque e o placar real, confirmado pelo usuario. Os outros tres
+// (r7-1, r7-2, r7-4) sao placar MINIMO PROVISORIO (30x10, pedido explicito do
+// usuario) - ele sabia so quem tinha ganho, nao o placar exato. Trocar pelo
+// placar real assim que ele achar (some/transmissao/grupo): isso muda
+// "A favor"/"Em contra" da temporada, que hoje estao com os numeros de
+// preenchimento, nao os reais.
+//
+// r7-1 tem 1 ponto de bonus manual (atkA) pro Cristo Rey: sem ele, 30x10 sem
+// bonus da 16 pontos (12 base + 4 da vitoria), que fica ABAIXO dos 17 do
+// Asuncion (que so perde, fica parado em 17) - e o usuario confirmou que a
+// posicao final e Cristo Rey na frente do Asuncion. Com o bonus, os dois
+// empatam em 17 e o confronto direto desse mesmo jogo desempata a favor do
+// Cristo Rey. Ajuste tambem quando trocar pelo placar real.
 const ROUND7_MATCHES = [
-  { id: "r7-1", a: "cristo-rey", b: "asuncion", official: null },
-  { id: "r7-2", a: "santa-clara", b: "fernando", official: null },
-  { id: "r7-3", a: "curda", b: "luque", official: null },
-  { id: "r7-4", a: "jararas", b: "san-jose", official: null },
+  { id: "r7-1", a: "cristo-rey", b: "asuncion", official: { scoreA: 30, scoreB: 10, atkA: true } },
+  { id: "r7-2", a: "santa-clara", b: "fernando", official: { scoreA: 30, scoreB: 10 } },
+  { id: "r7-3", a: "curda", b: "luque", official: { scoreA: 54, scoreB: 46 } },
+  { id: "r7-4", a: "jararas", b: "san-jose", official: { scoreA: 10, scoreB: 30 } },
 ];
 
 // Datas da fase final
