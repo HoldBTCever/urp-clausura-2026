@@ -30,20 +30,15 @@ const BASE_STANDINGS = {
 // official: null enquanto o resultado nao for confirmado pelo administrador do site.
 // Placares reais, do print oficial "Fecha 7" que o usuario mandou em 30/09.
 //
-// r7-1 ainda tem 1 ponto de bonus manual (atkA) pro Cristo Rey: mesmo com o
-// placar real (40x15, margem 25 - nao aciona bonus defensivo automatico),
-// sem esse ponto o Cristo Rey fecha com 16 (12 base + 4 da vitoria), ABAIXO
-// dos 17 do Asuncion (que so perde e fica parado em 17) - e o usuario
-// confirmou que a posicao final e Cristo Rey na frente do Asuncion. Com o
-// bonus os dois empatam em 17 e o confronto direto desse mesmo jogo
-// desempata a favor do Cristo Rey. NAO CONFIRMADO se foi bonus ofensivo de
-// verdade (4+ tries de diferenca) - perguntar pro usuario; pode ser que o
-// placar oficial da URP ja traga o bonus certo no lugar desse ajuste manual.
+// Bonus ofensivo (4+ tries de diferenca) confirmados pelo usuario em 30/09:
+// Cristo Rey (fez 4 tries a mais que o Asuncion - e tambem o que garante o
+// Cristo Rey empatado em 17 com o Asuncion, desempatado a favor dele pelo
+// confronto direto deste mesmo jogo), San Jose e Santa Clara.
 const ROUND7_MATCHES = [
   { id: "r7-1", a: "cristo-rey", b: "asuncion", official: { scoreA: 40, scoreB: 15, atkA: true } },
-  { id: "r7-2", a: "santa-clara", b: "fernando", official: { scoreA: 50, scoreB: 15 } },
+  { id: "r7-2", a: "santa-clara", b: "fernando", official: { scoreA: 50, scoreB: 15, atkA: true } },
   { id: "r7-3", a: "curda", b: "luque", official: { scoreA: 54, scoreB: 46 } },
-  { id: "r7-4", a: "jararas", b: "san-jose", official: { scoreA: 8, scoreB: 117 } },
+  { id: "r7-4", a: "jararas", b: "san-jose", official: { scoreA: 8, scoreB: 117, atkB: true } },
 ];
 
 // Datas da fase final
