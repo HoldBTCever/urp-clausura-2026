@@ -54,12 +54,6 @@ function isOfficial(match) {
   return !!(match.official && match.official.scoreA != null);
 }
 
-function zeroBase(ids) {
-  const out = {};
-  ids.forEach((id) => (out[id] = { pj: 0, pg: 0, pe: 0, pp: 0, bonus: 0, favor: 0, contra: 0 }));
-  return out;
-}
-
 // Bonus = bonus ofensivo marcado manualmente (4+ tries de diferenca, nao da
 // pra derivar so do placar) + bonus defensivo automatico (perder por menos
 // de 7 pontos). Empate nao concede bonus defensivo pra ninguem.
@@ -338,7 +332,7 @@ function buildGroupRounds(cupKey, seedIds) {
   }));
 }
 
-function renderCup(cupKey, seedIds, refs, titleKey) {
+function renderCup(cupKey, seedIds, refs, titleKey, seasonAcc) {
   // --- fase de grupos ---
   const rounds = buildGroupRounds(cupKey, seedIds);
   refs.groupEl.innerHTML = "";
@@ -358,7 +352,13 @@ function renderCup(cupKey, seedIds, refs, titleKey) {
   const allGroupMatches = rounds.flatMap((r) => r.matches);
   let groupRows = null;
   if (seedIds) {
-    const acc = computeStandings(zeroBase(seedIds), allGroupMatches);
+    // A pontuacao da fase classificatoria (temporada regular) continua
+    // valendo aqui - a fase de grupos SOMA em cima dela, nao comeca do
+    // zero. So o agrupamento em si (quem esta na Oro/Desarrollo) e fixo:
+    // ninguem troca de taca por causa da pontuacao dessa fase.
+    const carriedBase = {};
+    seedIds.forEach((id) => { carriedBase[id] = { ...seasonAcc[id] }; });
+    const acc = computeStandings(carriedBase, allGroupMatches);
     const groupH2H = (aId, bId) => headToHead(aId, bId, allGroupMatches);
     groupRows = toRows(acc, seedIds.map((id) => TEAMS_BY_ID[id]), groupH2H);
     const tblWrap = document.createElement("div");
@@ -478,7 +478,8 @@ function renderAll() {
       finalEl: document.getElementById("oro-final"),
       championEl: document.getElementById("oro-champion"),
     },
-    "cup_oro_title"
+    "cup_oro_title",
+    acc
   );
 
   renderCup(
@@ -490,7 +491,8 @@ function renderAll() {
       finalEl: document.getElementById("des-final"),
       championEl: document.getElementById("des-champion"),
     },
-    "cup_des_title"
+    "cup_des_title",
+    acc
   );
 
   restoreFocus(focusInfo);
