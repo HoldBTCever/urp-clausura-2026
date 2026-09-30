@@ -28,25 +28,22 @@ const BASE_STANDINGS = {
 
 // Ultima rodada da fase classificatoria (antes dos playoffs) - ENCERRADA.
 // official: null enquanto o resultado nao for confirmado pelo administrador do site.
+// Placares reais, do print oficial "Fecha 7" que o usuario mandou em 30/09.
 //
-// Curda 54x46 Luque e o placar real, confirmado pelo usuario. Os outros tres
-// (r7-1, r7-2, r7-4) sao placar MINIMO PROVISORIO (30x10, pedido explicito do
-// usuario) - ele sabia so quem tinha ganho, nao o placar exato. Trocar pelo
-// placar real assim que ele achar (some/transmissao/grupo): isso muda
-// "A favor"/"Em contra" da temporada, que hoje estao com os numeros de
-// preenchimento, nao os reais.
-//
-// r7-1 tem 1 ponto de bonus manual (atkA) pro Cristo Rey: sem ele, 30x10 sem
-// bonus da 16 pontos (12 base + 4 da vitoria), que fica ABAIXO dos 17 do
-// Asuncion (que so perde, fica parado em 17) - e o usuario confirmou que a
-// posicao final e Cristo Rey na frente do Asuncion. Com o bonus, os dois
-// empatam em 17 e o confronto direto desse mesmo jogo desempata a favor do
-// Cristo Rey. Ajuste tambem quando trocar pelo placar real.
+// r7-1 ainda tem 1 ponto de bonus manual (atkA) pro Cristo Rey: mesmo com o
+// placar real (40x15, margem 25 - nao aciona bonus defensivo automatico),
+// sem esse ponto o Cristo Rey fecha com 16 (12 base + 4 da vitoria), ABAIXO
+// dos 17 do Asuncion (que so perde e fica parado em 17) - e o usuario
+// confirmou que a posicao final e Cristo Rey na frente do Asuncion. Com o
+// bonus os dois empatam em 17 e o confronto direto desse mesmo jogo
+// desempata a favor do Cristo Rey. NAO CONFIRMADO se foi bonus ofensivo de
+// verdade (4+ tries de diferenca) - perguntar pro usuario; pode ser que o
+// placar oficial da URP ja traga o bonus certo no lugar desse ajuste manual.
 const ROUND7_MATCHES = [
-  { id: "r7-1", a: "cristo-rey", b: "asuncion", official: { scoreA: 30, scoreB: 10, atkA: true } },
-  { id: "r7-2", a: "santa-clara", b: "fernando", official: { scoreA: 30, scoreB: 10 } },
+  { id: "r7-1", a: "cristo-rey", b: "asuncion", official: { scoreA: 40, scoreB: 15, atkA: true } },
+  { id: "r7-2", a: "santa-clara", b: "fernando", official: { scoreA: 50, scoreB: 15 } },
   { id: "r7-3", a: "curda", b: "luque", official: { scoreA: 54, scoreB: 46 } },
-  { id: "r7-4", a: "jararas", b: "san-jose", official: { scoreA: 10, scoreB: 30 } },
+  { id: "r7-4", a: "jararas", b: "san-jose", official: { scoreA: 8, scoreB: 117 } },
 ];
 
 // Datas da fase final
