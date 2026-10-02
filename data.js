@@ -34,10 +34,14 @@ const BASE_STANDINGS = {
 // Cristo Rey (fez 4 tries a mais que o Asuncion - e tambem o que garante o
 // Cristo Rey empatado em 17 com o Asuncion, desempatado a favor dele pelo
 // confronto direto deste mesmo jogo), San Jose e Santa Clara.
+//
+// Curda e Luque: a tabela oficial de posicoes (print de 02/10) mostra os
+// dois com 1 ponto a mais do que so vitoria/derrota davam (Curda 25, nao
+// 24; Luque 27, nao 26) - cada um com seu bonus nesse mesmo jogo 54x46.
 const ROUND7_MATCHES = [
   { id: "r7-1", a: "cristo-rey", b: "asuncion", official: { scoreA: 40, scoreB: 15, atkA: true } },
   { id: "r7-2", a: "santa-clara", b: "fernando", official: { scoreA: 50, scoreB: 15, atkA: true } },
-  { id: "r7-3", a: "curda", b: "luque", official: { scoreA: 54, scoreB: 46 } },
+  { id: "r7-3", a: "curda", b: "luque", official: { scoreA: 54, scoreB: 46, atkA: true, atkB: true } },
   { id: "r7-4", a: "jararas", b: "san-jose", official: { scoreA: 8, scoreB: 117, atkB: true } },
 ];
 
